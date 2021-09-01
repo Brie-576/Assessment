@@ -1,0 +1,124 @@
+package Assessment;
+import java.util.*;
+
+public class RockPaperScicssors {
+	static final String User = "User wins!";
+    static final String Computer = "Computer wins!";
+    static final String Tie = "Tie";
+	static final String[] choices = {"rock", "paper", "scissors"};
+	
+	
+	
+	public static int usersChoice(Scanner sc) {
+		int choice = 0;
+		System.out.println("What would you like to play (1)Rock, (2)Paper, or (3)Scissors");
+		
+		boolean play = false;
+		while(!play) {
+			choice = Integer.parseInt(sc.nextLine());
+			if(choice >= 1 && choice <= 3 ) {
+				play = true; 
+			} else {
+				System.out.println("Invaild input, try again, choose 1,2, or 3");
+			}
+		}
+		choice--;
+		return choice; 
+		
+	}
+	
+	public static String game(int player, int computer) {
+	        switch (player) {
+	            case 0:
+	                switch (computer) {
+	                    case 0:
+	                        return Tie;
+	                    case 1:
+	                        return Computer;
+	                    case 2:
+	                        return User;
+	                }
+	            case 1:
+	                switch (computer) {
+	                    case 0:
+	                        return User;
+	                    case 1:
+	                        return Tie;
+	                    case 2:
+	                        return Computer;
+	                }
+	            case 2:
+	                switch (computer) {
+	                    case 0:
+	                        return Computer;
+	                    case 1:
+	                        return User;
+	                    case 2:
+	                        return Tie;
+	                }
+	        }
+	        return Tie;
+	    }
+	
+	public static void main(String[] args) {
+		System.out.println("Welcome to Rock, Paper, Scissors ");
+        Scanner sc = new Scanner(System.in); 
+        
+        char g = 'y';
+        while(g == 'y' || g == 'Y') {
+        	int rounds = 0;
+        	System.out.print("How many rounds you want to play: ");
+        	rounds = Integer.parseInt(sc.nextLine());
+        	if(rounds < 1 || rounds > 10) {
+        		System.out.println("Invalid Number, has to be between 1 and 10");
+        		System.exit(1);
+        		}
+        	
+        	int currentRound = 0;
+        	int ties=0;
+        	int userWins=0;
+        	int computerWins=0;
+        	
+        	while(currentRound < rounds) {
+        		int user = usersChoice(sc);
+        		int computer = (int) (Math.random() * 3);
+        		
+        		System.out.println("Round " + (currentRound + 1) + ":");
+        		System.out.println("User picked " + choices[user]);
+        		System.out.println("Computer picked " + choices[computer]);
+        		
+        		String winner = game(user, computer);
+        		System.out.println(winner);
+        		
+        		if(winner.equals(User)) {
+        			userWins++;
+        			}if(winner.equals(Computer)) {
+        				computerWins++;
+        				}if(winner.equals(Tie)) {
+        					ties++;
+        				}
+        				System.out.println();
+        				currentRound++;
+        				}
+        	System.out.println("Game over");
+        	System.out.println("User wins " + userWins);
+        	System.out.println("Computer wins " + computerWins);
+        	System.out.println("Tie " + ties);
+        	if(userWins > computerWins) {
+        		System.out.println("Player wins!");
+        		} else if(computerWins > userWins) { 
+        			System.out.println("Computer wins!");
+        			} else {
+        				System.out.println("It's a Tie!");
+        				}
+        	
+        	
+        	System.out.print("Do you want to play again(y/n): ");
+        	g = sc.nextLine().charAt(0);
+        	System.out.println("Game Over! thanks for playing");
+        	sc.close();
+        }
+        
+	}
+	
+}
