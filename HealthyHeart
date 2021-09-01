@@ -1,0 +1,40 @@
+package Assessment;
+import java.util.*;
+
+public class HealthyHearts {
+	
+	static Scanner sc = new Scanner(System.in);
+	public int a;
+
+	public HealthyHearts(int age) {
+		setUserAge(age);
+	}
+	
+	void setUserAge(int age) {
+		this.a = age;
+	}
+
+	int getAge() {
+		return a;
+	}
+	
+	int MaxHeartRate() {
+	        return 220 - getAge();
+	    }
+	
+	String TargetHeartRate() {
+		return String.format("%.0f - %.0f",MaxHeartRate() * 0.5, MaxHeartRate() * 0.85);
+		
+	}
+
+	public static void main(String[] args) {
+		 System.out.println("What is your age? ");
+	        int age = sc.nextInt();
+	        HealthyHearts p = new HealthyHearts(age);
+	        System.out.printf("Your maximum heart rate should be %d beats per minute ", p.MaxHeartRate());
+	        System.out.println();
+	        System.out.printf("Your target HR zone is %s beats per minute ", p.TargetHeartRate());
+		
+	}
+	
+}
